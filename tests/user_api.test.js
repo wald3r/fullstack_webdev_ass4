@@ -32,7 +32,6 @@ describe('add users to db', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
-    console.log(usersAtEnd)
     expect(usersAtEnd.length).toBe(usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(u => u.username)
@@ -55,7 +54,6 @@ describe('add users to db', () => {
     
       
     const usersAtEnd = await helper.usersInDb()
-    console.log(usersAtEnd)
     expect(usersAtEnd.length).toBe(usersAtStart.length)
   })
 

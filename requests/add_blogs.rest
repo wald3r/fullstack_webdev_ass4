@@ -3,7 +3,7 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbDEiLCJpZCI6IjVkNGViMzkxNGViNWRjN2UzMDYxNjc4MiIsImlhdCI6MTU2NTQ0NTkwM30.DW4etsouRea8Rxaj5BxsFrXIi6lAlqhkfHiy7X0rFLE
 
 {
-    "author": "Daniel Walder",
+    "author": "Daniel Walder1",
     "likes": 0,
     "url": "url",
     "userId": "5d4eb3914eb5dc7e30616782"

@@ -4,10 +4,15 @@ const app = require('../app')
 const api = supertest(app)
 const Blog = require('../models/blog')
 const helper = require('./test_helper')
+const User = require('../models/user')
+const bcrypt = require('bcrypt')
 
 
 beforeEach(async () => {
 
+    await User.deleteMany({})
+    const user = new User({ username: 'root', password: 'sekret' })
+    await user.save()
     await Blog.deleteMany({})
 
     for(let a = 0; a < helper.initialBlogs.length; a++){
@@ -29,9 +34,10 @@ test('verify blog likes', async () => {
                                  url: 'test',
                              }
 
-
+    const token = await helper.createToken()
     await api  
         .post('/api/blogs')
+        .set('Authorization', 'bearer ' + token) 
         .send(blogWithoutLikes)
         .expect(201)
 
@@ -51,10 +57,12 @@ test('verify title and url', async () => {
                                  author: 'Author5',
                              }
 
+    const token = await helper.createToken()   
 
     await api  
         .post('/api/blogs')
-        .send(blogWithoutUrlName)
+        .set('Authorization', 'bearer ' + token) 
+        .send(blogWithoutUrlandTitle)
         .expect(400)
         .expect('Content-Type', /application\/json/)
 
@@ -62,14 +70,17 @@ test('verify title and url', async () => {
 
 test('delete blog', async () => {
 
-    const response = await api.get('/api/blogs')
+    await helper.addBlogWithUser()
+    const token = await helper.createToken() 
 
+    const response = await api.get('/api/blogs')
     await api  
-        .delete(`/api/blogs/${response.body[0].id}`)
+        .delete(`/api/blogs/${response.body[4].id}`)
+        .set('Authorization', 'bearer ' + token)
         .expect(204)
 
     const secResponse = await api.get('/api/blogs')
-    expect(secResponse.body[0].id).not.toBe(response.body[0].id)
+    expect(secResponse.body).not.toContain(response.body[4].id)
 
 })
 
@@ -112,8 +123,10 @@ test('post blog', async () => {
         author: 'Author5'
     })
 
+    const token = await helper.createToken() 
     await api  
             .post('/api/blogs')
+            .set('Authorization', 'bearer ' + token) 
             .send(blog)
             .expect(201)
 
