@@ -1,0 +1,9 @@
+post http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "author": "Daniel Walder",
+    "likes": 0,
+    "url": "url",
+    "userId": "5d4eaee559b28978bd4a1b37"
+}
