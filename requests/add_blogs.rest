@@ -1,10 +1,9 @@
 post http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbDEiLCJpZCI6IjVkNGViMzkxNGViNWRjN2UzMDYxNjc4MiIsImlhdCI6MTU2NTQ0NTkwM30.DW4etsouRea8Rxaj5BxsFrXIi6lAlqhkfHiy7X0rFLE
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXIxIiwiaWQiOiI1ZDg4OGY5MjM5ODZlMzQxNzBjMjc3ZDEiLCJpYXQiOjE1NjkyMzEyNDV9.Wy4RTc7y-5vEzdMAaHxJQX2fX6sOKgDTf_KEipNZ8M8
 
 {
     "author": "Daniel Walder1",
     "likes": 0,
-    "url": "url",
-    "userId": "5d4eb3914eb5dc7e30616782"
+    "url": "url"
 }

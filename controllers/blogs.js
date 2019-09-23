@@ -61,10 +61,8 @@ blogsRouter.post('/', async (request, response, next) =>{
       if (!token || !decodedToken.id) {
         return response.status(401).json({ error: 'token missing or invalid' })
       }
-  
     const user = await User.findById(decodedToken.id)
     var blog = null
-
     if(body.author === undefined || body.url === undefined){
       return response.status(400).json()
     }
@@ -74,20 +72,20 @@ blogsRouter.post('/', async (request, response, next) =>{
         title: body.title,
         author: body.author,
         likes: 0,
-        user: user._id
+        user: user.id
       })
     } else{
       blog = new Blog({
         title: body.title,
         author: body.author,
         likes: body.likes,
-        user: user._id
+        user: user.id
       })
     }
    
       const savedBlog = await blog.save()
       if(user !== null){
-        user.blogs = user.blogs.concat(savedBlog._id)
+        user.blogs = user.blogs.concat(savedBlog.id)
         await user.save()
       }
       response.status(201).json(savedBlog.toJSON())
